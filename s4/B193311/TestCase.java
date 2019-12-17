@@ -49,6 +49,12 @@ public class TestCase {
 	    System.out.print("\"p\" in \"Hop Step Jumpppppp!!\" appears "+freq+" times. ");
 	    if(8 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
 
+        myObject.setSpace("prpr".getBytes());
+	    myObject.setTarget("prprprpr".getBytes());
+	    freq = myObject.frequency();
+	    System.out.print("\"prprprpr\" in \"prpr\" appears "+freq+" times. ");
+	    if(8 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+
 	}
 	catch(Exception e) {
 	    System.out.println("Exception occurred: STOP");
