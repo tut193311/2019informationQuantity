@@ -224,8 +224,8 @@ public class Frequencer implements FrequencerInterface{
 
 		int count = -1;
 		for(int i = 0; i < suffixArray.length; i++){
-			int suffix_i = suffixArray[i];
-			if(targetCompare(suffix_i, start, end) == 0){
+			//int suffix_i = suffixArray[i];
+			if(targetCompare(i, start, end) == 0){
 				count = i;
 				break;
 			}
@@ -262,8 +262,8 @@ public class Frequencer implements FrequencerInterface{
 
 		int count = -1;
 		for(int i = subByteStartIndex(start, end); i < suffixArray.length; i++) {
-			int suffix_i = suffixArray[i];
-			if(targetCompare(suffix_i, start, end) != 0) {
+			//int suffix_i = suffixArray[i];
+			if(targetCompare(i, start, end) != 0) {
 				count = i;
 				break;
 			}
