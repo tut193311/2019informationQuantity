@@ -221,7 +221,17 @@ public class Frequencer implements FrequencerInterface{
 		//
 		// ここにコードを記述せよ。
 		//
-		return suffixArray.length; //このコードは変更しなければならない。
+
+		int count = -1;
+		for(int i = 0; i < suffixArray.length; i++){
+			int suffix_i = suffixArray[i];
+			if(targetCompare(suffix_i, start, end) == 0){
+				count = i;
+				break;
+			}
+		}
+		return count;
+		//return suffixArray.length; //このコードは変更しなければならない。
 	}
 
 	private int subByteEndIndex(int start, int end) {
@@ -249,7 +259,16 @@ public class Frequencer implements FrequencerInterface{
 		//
 		//　ここにコードを記述せよ
 		//
-		return suffixArray.length; // この行は変更しなければならない、
+
+		int count = -1;
+		for(int i = subByteStartIndex(start, end); i < suffixArray.length; i++) {
+			int suffix_i = suffixArray[i];
+			if(targetCompare(suffix_i, start, end) != 0) {
+				count = i;
+				break;
+			}
+		}
+		return count; // この行は変更しなければならない、
 	}
 
 
@@ -286,13 +305,15 @@ public class Frequencer implements FrequencerInterface{
             frequencerObject.setTarget("i".getBytes());
             System.out.println("o > i : " + frequencerObject.targetCompare(9, 0, 1));
 			frequencerObject.setTarget("H".getBytes());
-			System.out.println("Ho = H : " + frequencerObject.targetCompare(5, 0, 1));
+			System.out.println(" Hi Ho = H : " + frequencerObject.targetCompare(0, 0, 1));
 			frequencerObject.setTarget("oo".getBytes());
 			System.out.println("o > oo : " + frequencerObject.targetCompare(9, 0, 2));
 
 
 			frequencerObject.setTarget("H".getBytes());
 
+			System.out.println(frequencerObject.subByteStartIndex(0, 1));
+			System.out.println(frequencerObject.subByteEndIndex(0, 1));
 			//
 			// ****  Please write code to check subByteStartIndex, and subByteEndIndex
 			//
