@@ -64,7 +64,26 @@ public class Frequencer implements FrequencerInterface{
 
 		// ここにコードを記述せよ
 		//
-		return 0; // この行は変更しなければいけない。
+		int index_i = suffixArray[i];
+		int index_j = suffixArray[j];
+		while(mySpace[index_i] == mySpace[index_j]){
+			index_i++;
+			index_j++;
+			if(mySpace.length <= index_i || mySpace.length <= index_j){
+				if(suffixArray[i] < suffixArray[j]){
+					return 1;
+				}else if(suffixArray[i] > suffixArray[j]){
+					return -1;
+				}else{
+					return 0;
+				}
+			}
+		}
+		if(mySpace[index_i] > mySpace[index_j]){
+			return 1;
+		}else{
+			return -1;
+		}
 	}
 
 	public void setSpace(byte []space) {
@@ -76,9 +95,20 @@ public class Frequencer implements FrequencerInterface{
 		for(int i = 0; i< space.length; i++) {
 			suffixArray[i] = i; // Please note that each suffix is expressed by one integer.
 		}
+
 		//
 		// ここに、int suffixArrayをソートするコードを書け。
 		// 　順番はsuffixCompareで定義されるものとする。
+
+		for(int i = 0; i < suffixArray.length; i++) {
+			for(int j = suffixArray.length-1; j > i; j--) {
+			    if(suffixCompare(i, j) == 1) {
+			    	int temp = suffixArray[i];
+			    	suffixArray[i] = suffixArray[j];
+			    	suffixArray[j] = temp;
+				}
+			}
+		}
 	}
 
 	// Suffix Arrayを用いて、文字列の頻度を求めるコード
