@@ -169,7 +169,29 @@ public class Frequencer implements FrequencerInterface{
 		//
 		// ここに比較のコードを書け
 		//
-		return 0; // この行は変更しなければならない。
+
+		int suffix_i = suffixArray[i];
+		int target_j = j;
+		int target_k = k;
+		int target_length = k-j;
+
+		while(mySpace[suffix_i] == myTarget[target_j]) {
+			suffix_i++;
+			target_j++;
+			if(mySpace.length <= suffix_i || target_k <= target_j) {
+				if(mySpace.length - suffixArray[i] < target_length) {
+					return -1;
+				} else {
+					return 0;
+				}
+			}
+		}
+		if(mySpace[suffix_i] > myTarget[target_j]) {
+			return 1;
+		} else {
+			return -1;
+		}
+		// return 0; // この行は変更しなければならない。
 	}
 
 
@@ -261,7 +283,16 @@ public class Frequencer implements FrequencerInterface{
                A:o Hi Ho
             */
 
+            frequencerObject.setTarget("i".getBytes());
+            System.out.println("o > i : " + frequencerObject.targetCompare(9, 0, 1));
 			frequencerObject.setTarget("H".getBytes());
+			System.out.println("Ho = H : " + frequencerObject.targetCompare(5, 0, 1));
+			frequencerObject.setTarget("oo".getBytes());
+			System.out.println("o > oo : " + frequencerObject.targetCompare(9, 0, 2));
+
+
+			frequencerObject.setTarget("H".getBytes());
+
 			//
 			// ****  Please write code to check subByteStartIndex, and subByteEndIndex
 			//
@@ -272,6 +303,7 @@ public class Frequencer implements FrequencerInterface{
 		}
 		catch(Exception e) {
 			System.out.println("STOP");
+			e.printStackTrace();
 		}
 	}
 }
