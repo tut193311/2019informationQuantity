@@ -91,24 +91,70 @@ public class Frequencer implements FrequencerInterface{
 		mySpace = space; if(mySpace.length>0) spaceReady = true;
 		// First, create unsorted suffix array.
 		suffixArray = new int[space.length];
+		int tempArray[] = new int[space.length];
 		// put all suffixes in suffixArray.
 		for(int i = 0; i< space.length; i++) {
-			suffixArray[i] = i; // Please note that each suffix is expressed by one integer.
+			suffixArray[i] = i;
+			tempArray[i] = i;	// Please note that each suffix is expressed by one integer.
 		}
 
 		//
 		// ここに、int suffixArrayをソートするコードを書け。
 		// 　順番はsuffixCompareで定義されるものとする。
 
-		for(int i = 0; i < suffixArray.length; i++) {
-			for(int j = suffixArray.length-1; j > i; j--) {
-			    if(suffixCompare(i, j) == 1) {
-			    	int temp = suffixArray[i];
-			    	suffixArray[i] = suffixArray[j];
-			    	suffixArray[j] = temp;
-				}
+		//バブルソート
+//		for(int i = 0; i < suffixArray.length; i++) {
+//			for(int j = suffixArray.length-1; j > i; j--) {
+//			    if(suffixCompare(i, j) == 1) {
+//			    	int temp = suffixArray[i];
+//			    	suffixArray[i] = suffixArray[j];
+//			    	suffixArray[j] = temp;
+//				}
+//			}
+//		}
+
+		//マージソート
+		suffixArray = mergeSort(tempArray);
+	}
+	//マージソートに必要な関数群
+	private int[] mergeSort(int array[]){
+		if(array.length > 1){
+			int left = array.length/2;
+			int right = array.length - left;
+			int a1[] = new int[left];
+			int a2[] = new int[right];
+			for(int i = 0; i < left; i++){ a1[i] = array[i]; }
+			for(int i = 0; i < right; i++){ a2[i] = array[left+i]; }
+			mergeSort(a1);
+			mergeSort(a2);
+			merge(a1, a2, array);
+		}
+		return array;
+	}
+
+	private void merge(int a1[], int a2[], int array[]){
+		int i = 0;
+		int j = 0;
+		while(i < a1.length || j < a2.length){
+			if(i >= a1.length || (j < a2.length && suffixCompare(a1[i], a2[j]) == 1)){
+				array[i+j] = a2[j];
+				j++;
+			}else{
+				array[i+j] = a1[i];
+				i++;
 			}
 		}
+//		if(i >= a1.length){
+//			while(j < a2.length){
+//				array[i+j] = a2[j];
+//				j++;
+//			}
+//		}else{
+//			while(i < a1.length){
+//				array[i+j] = a1[i];
+//				i++;
+//			}
+//		}
 	}
 
 	// Suffix Arrayを用いて、文字列の頻度を求めるコード
