@@ -281,7 +281,7 @@ public class Frequencer implements FrequencerInterface{
 			}else{
 				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid-1, start, end) != 0){
 					return mid;
-				}else if(mid == (suffixArray.length - 1)/2 - 1 || mid == (suffixArray.length - 1)/2 + 1){
+				}else if(left == right){
 					return -1;
 				}else if(targetCompare(mid, start, end) == -1){
 					left = mid + 1;
@@ -343,7 +343,7 @@ public class Frequencer implements FrequencerInterface{
 			}else{
 				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid+1, start, end) != 0){
 					return mid+1;
-				}else if(mid == (suffixArray.length - 1)/2 - 1 || mid == (suffixArray.length - 1)/2 + 1){
+				}else if(left == right){
 					return -1;
 				}else if(targetCompare(mid, start, end) == 1){
 					right = mid - 1;
@@ -369,7 +369,7 @@ public class Frequencer implements FrequencerInterface{
 		Frequencer frequencerObject;
 		try {
 			frequencerObject = new Frequencer();
-			frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
+			frequencerObject.setSpace("AAAB".getBytes());
 			frequencerObject.printSuffixArray(); // you may use this line for DEBUG
             /* Example from "Hi Ho Hi Ho"
                0: Hi Ho
@@ -385,18 +385,20 @@ public class Frequencer implements FrequencerInterface{
                A:o Hi Ho
             */
 
-            frequencerObject.setTarget("i".getBytes());
-            System.out.println("'o' > 'i' : " + frequencerObject.targetCompare(9, 0, 1));
-			frequencerObject.setTarget("H".getBytes());
-			System.out.println("'Ho' = 'H' : " + frequencerObject.targetCompare(5, 0, 1));
-			frequencerObject.setTarget("H".getBytes());
-			System.out.println("'i Ho Hi Ho' > 'H': " + frequencerObject.targetCompare(8, 0, 1));
+//            frequencerObject.setTarget("i".getBytes());
+//            System.out.println("'o' > 'i' : " + frequencerObject.targetCompare(9, 0, 1));
+//			frequencerObject.setTarget("H".getBytes());
+//			System.out.println("'Ho' = 'H' : " + frequencerObject.targetCompare(5, 0, 1));
+//			frequencerObject.setTarget("H".getBytes());
+//			System.out.println("'i Ho Hi Ho' > 'H': " + frequencerObject.targetCompare(8, 0, 1));
+			frequencerObject.setTarget("AAAAB".getBytes());
+			System.out.println("'B' = 'B': " + frequencerObject.targetCompare(3, 4, 5));
 
 
-			frequencerObject.setTarget("H".getBytes());
+			frequencerObject.setTarget("AAAAB".getBytes());
 
-			System.out.println(frequencerObject.subByteStartIndex(0, 1)); // 3 is correct.
-			System.out.println(frequencerObject.subByteEndIndex(0, 1)); // 7 is correct.
+			System.out.println(frequencerObject.subByteStartIndex(4, 5)); // 3 is correct.
+			System.out.println(frequencerObject.subByteEndIndex(4, 5)); // 7 is correct.
 			//
 			// ****  Please write code to check subByteStartIndex, and subByteEndIndex
 			//
