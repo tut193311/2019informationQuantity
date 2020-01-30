@@ -143,6 +143,8 @@ public class TestCase {
         }
         catch(Exception e) {
             System.out.println("Exception occurred: STOP");
+            System.out.println(e);
+            e.printStackTrace();
             c++;
         }
         if(c == 0) { System.out.println("TestCase OK"); }
