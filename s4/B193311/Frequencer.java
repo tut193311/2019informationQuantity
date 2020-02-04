@@ -44,6 +44,7 @@ public class Frequencer implements FrequencerInterface{
 				System.out.write('\n');
 			}
 		}
+<<<<<<< HEAD
 	}
 
 	private int suffixCompare(int i, int j) {
@@ -142,6 +143,71 @@ public class Frequencer implements FrequencerInterface{
 			}else{
 				array[i+j] = a1[i];
 				i++;
+=======
+	}
+
+	private int suffixCompare(int i, int j) {
+		// suffixCompareはソートのための比較メソッドである。
+		// 次のように定義せよ。
+		// comparing two suffixes by dictionary order.
+		// suffix_i is a string starting with the position i in "byte [] mySpace".
+		// Each i and j denote suffix_i, and suffix_j.
+		// Example of dictionary order
+		// "i"      <  "o"        : compare by code
+		// "Hi"     <  "Ho"       ; if head is same, compare the next element
+		// "Ho"     <  "Ho "      ; if the prefix is identical, longer string is big
+		//
+		//The return value of "int suffixCompare" is as follows.
+		// if suffix_i > suffix_j, it returns 1
+		// if suffix_i < suffix_j, it returns -1
+		// if suffix_i = suffix_j, it returns 0;
+
+		// ここにコードを記述せよ
+		//
+		int index_i = suffixArray[i];
+		int index_j = suffixArray[j];
+		while(mySpace[index_i] == mySpace[index_j]){
+			index_i++;
+			index_j++;
+			if(mySpace.length <= index_i || mySpace.length <= index_j){
+				if(suffixArray[i] < suffixArray[j]){
+					return 1;
+				}else if(suffixArray[i] > suffixArray[j]){
+					return -1;
+				}else{
+					return 0;
+				}
+			}
+		}
+		if(mySpace[index_i] > mySpace[index_j]){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
+
+	public void setSpace(byte []space) {
+		// suffixArrayの前処理は、setSpaceで定義せよ。
+		mySpace = space; if(mySpace.length>0) spaceReady = true;
+		// First, create unsorted suffix array.
+		suffixArray = new int[space.length];
+		// put all suffixes in suffixArray.
+		for(int i = 0; i< space.length; i++) {
+			suffixArray[i] = i; // Please note that each suffix is expressed by one integer.
+		}
+
+		//
+		// ここに、int suffixArrayをソートするコードを書け。
+		// 　順番はsuffixCompareで定義されるものとする。
+
+		for(int i = 0; i < suffixArray.length; i++) {
+			for(int j = suffixArray.length-1; j > i; j--) {
+			    if(suffixCompare(i, j) == 1) {
+			    	int temp = suffixArray[i];
+			    	suffixArray[i] = suffixArray[j];
+			    	suffixArray[j] = temp;
+				}
+>>>>>>> 77c75f48abb2080105253f1c5c74c26e2683c0fb
 			}
 		}
 	}
@@ -257,6 +323,7 @@ public class Frequencer implements FrequencerInterface{
 		// ここにコードを記述せよ。
 		//
 
+<<<<<<< HEAD
 //		int count = -1;
 //		for(int i = 0; i < suffixArray.length; i++){
 //			//int suffix_i = suffixArray[i];
@@ -290,6 +357,17 @@ public class Frequencer implements FrequencerInterface{
 				}
 			}
 		}
+=======
+		int count = -1;
+		for(int i = 0; i < suffixArray.length; i++){
+			//int suffix_i = suffixArray[i];
+			if(targetCompare(i, start, end) == 0){
+				count = i;
+				break;
+			}
+		}
+		return count;
+>>>>>>> 77c75f48abb2080105253f1c5c74c26e2683c0fb
 		//return suffixArray.length; //このコードは変更しなければならない。
 	}
 
@@ -319,6 +397,7 @@ public class Frequencer implements FrequencerInterface{
 		//　ここにコードを記述せよ
 		//
 
+<<<<<<< HEAD
 //		int count = -1;
 //		for(int i = subByteStartIndex(start, end); i < suffixArray.length; i++) {
 //			//int suffix_i = suffixArray[i];
@@ -352,6 +431,17 @@ public class Frequencer implements FrequencerInterface{
 				}
 			}
 		}
+=======
+		int count = -1;
+		for(int i = subByteStartIndex(start, end); i < suffixArray.length; i++) {
+			//int suffix_i = suffixArray[i];
+			if(targetCompare(i, start, end) != 0) {
+				count = i;
+				break;
+			}
+		}
+		return count; // この行は変更しなければならない、
+>>>>>>> 77c75f48abb2080105253f1c5c74c26e2683c0fb
 	}
 
 
@@ -386,6 +476,7 @@ public class Frequencer implements FrequencerInterface{
             */
 
             frequencerObject.setTarget("i".getBytes());
+<<<<<<< HEAD
             System.out.println("'o' > 'i' : " + frequencerObject.targetCompare(9, 0, 1));
 			frequencerObject.setTarget("H".getBytes());
 			System.out.println("'Ho' = 'H' : " + frequencerObject.targetCompare(5, 0, 1));
@@ -393,12 +484,24 @@ public class Frequencer implements FrequencerInterface{
 			System.out.println("'i Ho Hi Ho' > 'H': " + frequencerObject.targetCompare(8, 0, 1));
 //			frequencerObject.setTarget("AAAAB".getBytes());
 //			System.out.println("'B' = 'B': " + frequencerObject.targetCompare(3, 4, 5));
+=======
+            System.out.println("o > i : " + frequencerObject.targetCompare(9, 0, 1));
+			frequencerObject.setTarget("H".getBytes());
+			System.out.println(" Hi Ho = H : " + frequencerObject.targetCompare(0, 0, 1));
+			frequencerObject.setTarget("oo".getBytes());
+			System.out.println("o > oo : " + frequencerObject.targetCompare(9, 0, 2));
+>>>>>>> 77c75f48abb2080105253f1c5c74c26e2683c0fb
 
 
 			frequencerObject.setTarget("H".getBytes());
 
+<<<<<<< HEAD
 			System.out.println(frequencerObject.subByteStartIndex(0, 1)); // 3 is correct.
 			System.out.println(frequencerObject.subByteEndIndex(0, 1)); // 7 is correct.
+=======
+			System.out.println(frequencerObject.subByteStartIndex(0, 1));
+			System.out.println(frequencerObject.subByteEndIndex(0, 1));
+>>>>>>> 77c75f48abb2080105253f1c5c74c26e2683c0fb
 			//
 			// ****  Please write code to check subByteStartIndex, and subByteEndIndex
 			//
