@@ -33,6 +33,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 
     // IQ: information quantity for a count,  -log2(count/sizeof(space))
     double iq(int freq) {
+    	//System.out.println(- Math.log10((double) freq / (double) mySpace.length)/ Math.log10((double) 2.0));
     	return  - Math.log10((double) freq / (double) mySpace.length)/ Math.log10((double) 2.0);
     }
 
@@ -97,6 +98,15 @@ public class InformationEstimator implements InformationEstimatorInterface{
 //		}
 //		return value;
 		//double value = Double.MAX_VALUE;
+
+		if(mySpace == null || mySpace.length == 0){
+			return Double.MAX_VALUE;
+		}
+
+		if(myTarget == null || myTarget.length == 0){
+			return 0.0;
+		}
+
 		int start = 0;
 		int end = 1;
 		for(end = 1; end <= myTarget.length; end++){

@@ -123,8 +123,10 @@ public class Frequencer implements FrequencerInterface{
 			int right = array.length - left;
 			int a1[] = new int[left];
 			int a2[] = new int[right];
-			for(int i = 0; i < left; i++){ a1[i] = array[i]; }
-			for(int i = 0; i < right; i++){ a2[i] = array[left+i]; }
+			//for(int i = 0; i < left; i++){ a1[i] = array[i]; }
+			//for(int i = 0; i < right; i++){ a2[i] = array[left+i]; }
+			System.arraycopy(array, 0, a1, 0, a1.length);
+			System.arraycopy(array, left, a2, 0, a2.length);
 			mergeSort(a1);
 			mergeSort(a2);
 			merge(a1, a2, array);
