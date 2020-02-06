@@ -168,14 +168,14 @@ public class AdditionalTestCase {
             //Additional Test
             myObject = new Frequencer();
             String longString = new String();
-            for (int i = 0; i < Math.pow(10, 3); i++) {
+            for (int i = 0; i < Math.pow(10, 0); i++) {
                 longString = longString + "A";
             }
             myObject.setSpace(longString.getBytes());
             myObject.setTarget("A".getBytes());
             freq = myObject.subByteFrequency(0, 1);
-            if (Math.pow(10, 3) != freq) {
-                System.out.println("SubBytefrequency() for A*10^3, should return 10^3, when taget is A[0:1]. But it returns " + freq);
+            if (Math.pow(10, 0) != freq) {
+                System.out.println("SubBytefrequency() for A*10^0, should return 10^0, when taget is A[0:1]. But it returns " + freq);
                 c++;
             }
 
@@ -192,18 +192,18 @@ public class AdditionalTestCase {
                 c++;
             }
 
-//            myObject = new Frequencer();
-//            longString = new String();
-//            for (int i = 0; i < Math.pow(10, 5); i++) {
-//                longString = longString + "A";
-//            }
-//            myObject.setSpace(longString.getBytes());
-//            myObject.setTarget("A".getBytes());
-//            freq = myObject.subByteFrequency(0, 1);
-//            if (Math.pow(10, 5) != freq) {
-//                System.out.println("SubBytefrequency() for A*10^4, should return 10^5, when taget is A[0:1]. But it returns " + freq);
-//                c++;
-//            }
+            myObject = new Frequencer();
+            longString = new String();
+            for (int i = 0; i < Math.pow(10, 4); i++) {
+                longString = longString + "AAAAAAAAAA";
+            }
+            myObject.setSpace(longString.getBytes());
+            myObject.setTarget("A".getBytes());
+            freq = myObject.subByteFrequency(0, 1);
+            if (Math.pow(10, 5) != freq) {
+                System.out.println("SubBytefrequency() for A*10^4, should return 10^5, when taget is A[0:1]. But it returns " + freq);
+                c++;
+            }
         } catch (Exception e) {
             System.out.println("Exception occurred in Frequencer Object: STOP");
             c++;

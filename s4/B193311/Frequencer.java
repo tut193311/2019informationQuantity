@@ -117,35 +117,82 @@ public class Frequencer implements FrequencerInterface{
 		suffixArray = mergeSort(tempArray);
 	}
 	//マージソートに必要な関数群
-	private int[] mergeSort(int array[]){
-		if(array.length > 1){
-			int left = array.length/2;
-			int right = array.length - left;
-			int a1[] = new int[left];
-			int a2[] = new int[right];
-			//for(int i = 0; i < left; i++){ a1[i] = array[i]; }
-			//for(int i = 0; i < right; i++){ a2[i] = array[left+i]; }
-			System.arraycopy(array, 0, a1, 0, a1.length);
-			System.arraycopy(array, left, a2, 0, a2.length);
-			mergeSort(a1);
-			mergeSort(a2);
-			merge(a1, a2, array);
-		}
-		return array;
-	}
+//	private int[] mergeSort(int array[]){
+//		if(array.length > 1){
+//			int left = array.length/2;
+//			int right = array.length - left;
+//			int a1[] = new int[left];
+//			int a2[] = new int[right];
+//			//for(int i = 0; i < left; i++){ a1[i] = array[i]; }
+//			//for(int i = 0; i < right; i++){ a2[i] = array[left+i]; }
+//			System.arraycopy(array, 0, a1, 0, a1.length);
+//			System.arraycopy(array, left, a2, 0, a2.length);
+//			mergeSort(a1);
+//			mergeSort(a2);
+//			merge(a1, a2, array);
+//		}
+//		return array;
+//	}
+//
+//	private void merge(int a1[], int a2[], int array[]){
+//		int i = 0;
+//		int j = 0;
+//		while(i < a1.length || j < a2.length){
+//			if(i >= a1.length || (j < a2.length && suffixCompare(a1[i], a2[j]) == 1)){
+//				array[i+j] = a2[j];
+//				j++;
+//			}else{
+//				array[i+j] = a1[i];
+//				i++;
+//			}
+//		}
+//	}
 
-	private void merge(int a1[], int a2[], int array[]){
-		int i = 0;
-		int j = 0;
-		while(i < a1.length || j < a2.length){
-			if(i >= a1.length || (j < a2.length && suffixCompare(a1[i], a2[j]) == 1)){
-				array[i+j] = a2[j];
-				j++;
-			}else{
-				array[i+j] = a1[i];
-				i++;
+	//再帰を使わないマージソート
+	private int[] mergeSort(int array[]){
+		 if(array.length < 2){
+		 	return array;
+		 }
+		 int left = 0;
+		 int right = 1;
+		 int end = 2;
+		 int step = 1;
+		 int array_length = array.length;
+		 int[] tmp = new int[array_length];
+		 while(step < array_length){
+		 	while(left <= array_length-1){
+		 		if(end > array_length){
+		 			end = array_length;
+				}
+		 		if(right > array_length-1){
+		 			right = end;
+				}
+				for(int i = left, j = 0, k = 0; i < end; i++){
+					if(left+j == right){
+						tmp[i] = array[right+k];
+						k++;
+					}else if(right+k == end){
+						tmp[i] = array[left+j];
+						j++;
+					}else if(suffixCompare(array[left+j], array[right+k]) == 1){
+						tmp[i] = array[right+k];
+						k++;
+					}else{
+						tmp[i] = array[left+j];
+						j++;
+					}
+				}
+		 		left = end;
+		 		right = end+step;
+		 		end = end+step+step;
 			}
-		}
+			step = step*2;
+			left = 0;
+			right = step;
+			end = step+step;
+			System.arraycopy(tmp, 0, array, 0, array_length);
+		 }
+		 return array;
 	}
 
 	// Suffix Arrayを用いて、文字列の頻度を求めるコード

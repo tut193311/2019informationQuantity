@@ -119,6 +119,8 @@ public class TestCase {
         }
         catch(Exception e) {
             System.out.println("Exception occurred in Frequencer Object: STOP");
+            System.out.println(e);
+            e.printStackTrace();
             c++;
         }
 
