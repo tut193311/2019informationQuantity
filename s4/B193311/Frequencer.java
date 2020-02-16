@@ -224,7 +224,6 @@ public class Frequencer implements FrequencerInterface{
         */
 		int first = subByteStartIndex(start, end);
 		int last1 = subByteEndIndex(start, end);
-		//System.out.println(first + " " + last1);
 		return last1 - first;
 	}
 	// 変更してはいけないコードはここまで。
@@ -278,7 +277,6 @@ public class Frequencer implements FrequencerInterface{
 		} else {
 			return -1;
 		}
-		// return 0; // この行は変更しなければならない。
 	}
 
 
@@ -327,7 +325,6 @@ public class Frequencer implements FrequencerInterface{
 		int right = suffixArray.length - 1;
 		while(true){
 			int mid = (left + right)/2;
-			//System.out.println(left + " " + mid + " " + right);
 			int result = targetCompare(mid, start, end);
 			if(left >= right){
 				if(result == 0){
@@ -343,33 +340,6 @@ public class Frequencer implements FrequencerInterface{
 				right = mid - 1;
 			}
 		}
-//		int left = 0;
-//		int right = suffixArray.length - 1;
-//		while(true){
-//			int mid = (left + right)/2;
-//			if(mid == 0 || mid == suffixArray.length - 1){
-//				if(targetCompare(mid, start, end) == 0){
-//					return mid;
-//				}else{
-//					return -1;
-//				}
-//			}else{
-//				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid-1, start, end) != 0){
-//					return mid;
-//				}else if(left == right){
-//					if(targetCompare(mid, start, end) == 0){
-//						return mid;
-//					}else{
-//						return -1;
-//					}
-//				}else if(targetCompare(mid, start, end) == -1){
-//					left = mid + 1;
-//				}else{
-//					right = mid - 1;
-//				}
-//			}
-//		}
-		//return suffixArray.length; //このコードは変更しなければならない。
 	}
 
 	private int subByteEndIndex(int start, int end) {
@@ -406,7 +376,6 @@ public class Frequencer implements FrequencerInterface{
 //				break;
 //			}
 //		}
-//		return count; // この行は変更しなければならない、
 
 		//二分探索
 		if(targetCompare(mySpace.length-1, start, end) == 0){
@@ -430,29 +399,6 @@ public class Frequencer implements FrequencerInterface{
 			}else{
 				left = mid + 1;
 			}
-//			System.out.println(left + " " + mid + " " + right);
-//			if(mid == 0 || mid == suffixArray.length - 1){
-//				if(targetCompare(mid, start, end) == 0){
-//					return mid + 1;
-//				}else{
-//					return -1;
-//				}
-//			}else{
-//				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid+1, start, end) != 0){
-//					return mid + 1;
-//				}else if(left == right){
-//					if(targetCompare(mid, start, end) == 0){
-//						return mid + 1;
-//					}else{
-//						return -1;
-//					}
-////					return -1;
-//				}else if(targetCompare(mid, start, end) == 1){
-//					right = mid - 1;
-//				}else{
-//					left = mid + 1;
-//				}
-//			}
 		}
 	}
 
