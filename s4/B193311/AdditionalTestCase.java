@@ -262,7 +262,7 @@ public class AdditionalTestCase {
             myObject.setTarget("B".getBytes());
             freq = myObject.subByteFrequency(0, 1);
             if (2 != freq) {
-                System.out.println("SubBytefrequency() for ABBEE, should return 1, when taget is B[0:1]. But it returns " + freq);
+                System.out.println("SubBytefrequency() for ABBEE, should return 2, when taget is B[0:1]. But it returns " + freq);
                 c++;
             }
 
@@ -271,7 +271,25 @@ public class AdditionalTestCase {
             myObject.setTarget("B".getBytes());
             freq = myObject.subByteFrequency(0, 1);
             if (2 != freq) {
-                System.out.println("SubBytefrequency() for AABBE, should return 1, when taget is B[0:1]. But it returns " + freq);
+                System.out.println("SubBytefrequency() for AABBE, should return 2, when taget is B[0:1]. But it returns " + freq);
+                c++;
+            }
+
+            myObject = new Frequencer();
+            myObject.setSpace("0123456789".getBytes());
+            myObject.setTarget("0".getBytes());
+            freq = myObject.subByteFrequency(0, 1);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for 0123456789, should return 1, when taget is 0[0:1]. But it returns " + freq);
+                c++;
+            }
+
+            myObject = new Frequencer();
+            myObject.setSpace("0123456789".getBytes());
+            myObject.setTarget("9".getBytes());
+            freq = myObject.subByteFrequency(0, 1);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for 0123456789, should return 1, when taget is 9[0:1]. But it returns " + freq);
                 c++;
             }
 
