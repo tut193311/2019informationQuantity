@@ -224,6 +224,7 @@ public class Frequencer implements FrequencerInterface{
         */
 		int first = subByteStartIndex(start, end);
 		int last1 = subByteEndIndex(start, end);
+		//System.out.println(first + " " + last1);
 		return last1 - first;
 	}
 	// 変更してはいけないコードはここまで。
@@ -265,7 +266,9 @@ public class Frequencer implements FrequencerInterface{
 			if(mySpace.length <= suffix_i || target_k <= target_j) {
 				if(mySpace.length - suffixArray[i] < target_length) {
 					return -1;
-				} else {
+				} else if(mySpace.length - suffixArray[i] > target_length){
+					return 0;
+				}else{
 					return 0;
 				}
 			}
@@ -317,28 +320,55 @@ public class Frequencer implements FrequencerInterface{
 //		return count;
 
 		//二分探索
-		int left = 0;
+		if(targetCompare(0, start, end) == 0){
+			return 0;
+		}
+		int left = 1;
 		int right = suffixArray.length - 1;
 		while(true){
 			int mid = (left + right)/2;
-			if(mid == 0 || mid == suffixArray.length - 1){
-				if(targetCompare(mid, start, end) == 0){
+			//System.out.println(left + " " + mid + " " + right);
+			int result = targetCompare(mid, start, end);
+			if(left >= right){
+				if(result == 0){
 					return mid;
 				}else{
 					return -1;
 				}
+			}else if(result == 0 && targetCompare(mid-1, start, end) != 0){
+				return mid;
+			}else if(result == -1){
+				left = mid + 1;
 			}else{
-				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid-1, start, end) != 0){
-					return mid;
-				}else if(left == right){
-					return -1;
-				}else if(targetCompare(mid, start, end) == -1){
-					left = mid + 1;
-				}else{
-					right = mid - 1;
-				}
+				right = mid - 1;
 			}
 		}
+//		int left = 0;
+//		int right = suffixArray.length - 1;
+//		while(true){
+//			int mid = (left + right)/2;
+//			if(mid == 0 || mid == suffixArray.length - 1){
+//				if(targetCompare(mid, start, end) == 0){
+//					return mid;
+//				}else{
+//					return -1;
+//				}
+//			}else{
+//				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid-1, start, end) != 0){
+//					return mid;
+//				}else if(left == right){
+//					if(targetCompare(mid, start, end) == 0){
+//						return mid;
+//					}else{
+//						return -1;
+//					}
+//				}else if(targetCompare(mid, start, end) == -1){
+//					left = mid + 1;
+//				}else{
+//					right = mid - 1;
+//				}
+//			}
+//		}
 		//return suffixArray.length; //このコードは変更しなければならない。
 	}
 
@@ -379,27 +409,50 @@ public class Frequencer implements FrequencerInterface{
 //		return count; // この行は変更しなければならない、
 
 		//二分探索
+		if(targetCompare(mySpace.length-1, start, end) == 0){
+			return mySpace.length;
+		}
 		int left = 0;
-		int right = suffixArray.length - 1;
+		int right = suffixArray.length - 2;
 		while(true){
 			int mid = (left + right)/2;
-			if(mid == 0 || mid == suffixArray.length - 1){
-				if(targetCompare(mid, start, end) == 0){
-					return mid+1;
+			int result = targetCompare(mid, start, end);
+			if(left >= right){
+				if(result == 0){
+					return mid + 1;
 				}else{
 					return -1;
 				}
+			}else if(result == 0 && targetCompare(mid+1, start, end) != 0){
+				return mid + 1;
+			}else if(result == 1){
+				right = mid - 1;
 			}else{
-				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid+1, start, end) != 0){
-					return mid+1;
-				}else if(left == right){
-					return -1;
-				}else if(targetCompare(mid, start, end) == 1){
-					right = mid - 1;
-				}else{
-					left = mid + 1;
-				}
+				left = mid + 1;
 			}
+//			System.out.println(left + " " + mid + " " + right);
+//			if(mid == 0 || mid == suffixArray.length - 1){
+//				if(targetCompare(mid, start, end) == 0){
+//					return mid + 1;
+//				}else{
+//					return -1;
+//				}
+//			}else{
+//				if(targetCompare(mid ,start, end) == 0 && targetCompare(mid+1, start, end) != 0){
+//					return mid + 1;
+//				}else if(left == right){
+//					if(targetCompare(mid, start, end) == 0){
+//						return mid + 1;
+//					}else{
+//						return -1;
+//					}
+////					return -1;
+//				}else if(targetCompare(mid, start, end) == 1){
+//					right = mid - 1;
+//				}else{
+//					left = mid + 1;
+//				}
+//			}
 		}
 	}
 

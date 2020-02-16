@@ -99,12 +99,12 @@ public class InformationEstimator implements InformationEstimatorInterface{
 //		return value;
 		//double value = Double.MAX_VALUE;
 
-		if(mySpace == null || mySpace.length == 0){
-			return Double.MAX_VALUE;
+		if(myTarget == null || myTarget.length <= 0){
+			return 0.0;
 		}
 
-		if(myTarget == null || myTarget.length == 0){
-			return 0.0;
+		if(mySpace == null || mySpace.length <= 0){
+			return Double.MAX_VALUE;
 		}
 
 		int start = 0;

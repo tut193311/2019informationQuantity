@@ -164,6 +164,22 @@ public class AdditionalTestCase {
                 System.out.println("SubBytefrequency() for AAAB, should return 1, when taget is AAAAB[4:5]. But it returns " + freq);
                 c++;
             }
+            myObject = new Frequencer();
+            myObject.setSpace("BAAA".getBytes());
+            myObject.setTarget("AAAAB".getBytes());
+            freq = myObject.subByteFrequency(4, 5);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for BAAA, should return 1, when taget is AAAAB[4:5]. But it returns " + freq);
+                c++;
+            }
+//            myObject = new Frequencer();
+//            myObject.setSpace("はろーわーるど".getBytes());
+//            myObject.setTarget("ー".getBytes());
+//            freq = myObject.subByteFrequency(0, 2);
+//            if (2 != freq) {
+//                System.out.println("SubBytefrequency() for はろーわーるど, should return 2, when taget is ー[0:2]. But it returns " + freq);
+//                c++;
+//            }
 
             //Additional Test
             myObject = new Frequencer();
@@ -192,20 +208,49 @@ public class AdditionalTestCase {
                 c++;
             }
 
+//            myObject = new Frequencer();
+//            longString = new String();
+//            for (int i = 0; i < Math.pow(10, 4); i++) {
+//                longString = longString + "AAAAAAAAAA";
+//            }
+//            myObject.setSpace(longString.getBytes());
+//            myObject.setTarget("A".getBytes());
+//            freq = myObject.subByteFrequency(0, 1);
+//            if (Math.pow(10, 5) != freq) {
+//                System.out.println("SubBytefrequency() for A*10^4, should return 10^5, when taget is A[0:1]. But it returns " + freq);
+//                c++;
+//            }
+
             myObject = new Frequencer();
-            longString = new String();
-            for (int i = 0; i < Math.pow(10, 4); i++) {
-                longString = longString + "AAAAAAAAAA";
-            }
-            myObject.setSpace(longString.getBytes());
-            myObject.setTarget("A".getBytes());
+            myObject.setSpace("ABC".getBytes());
+            myObject.setTarget("B".getBytes());
             freq = myObject.subByteFrequency(0, 1);
-            if (Math.pow(10, 5) != freq) {
-                System.out.println("SubBytefrequency() for A*10^4, should return 10^5, when taget is A[0:1]. But it returns " + freq);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for ABC, should return 1, when taget is B[0:1]. But it returns " + freq);
                 c++;
             }
+
+            myObject = new Frequencer();
+            myObject.setSpace("ABCDE".getBytes());
+            myObject.setTarget("B".getBytes());
+            freq = myObject.subByteFrequency(0, 1);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for ABCDE, should return 1, when taget is B[0:1]. But it returns " + freq);
+                c++;
+            }
+
+            myObject = new Frequencer();
+            myObject.setSpace("ABCDE".getBytes());
+            myObject.setTarget("D".getBytes());
+            freq = myObject.subByteFrequency(0, 1);
+            if (1 != freq) {
+                System.out.println("SubBytefrequency() for ABCDE, should return 1, when taget is D[0:1]. But it returns " + freq);
+                c++;
+            }
+
         } catch (Exception e) {
             System.out.println("Exception occurred in Frequencer Object: STOP");
+            System.out.println(e);
             c++;
         }
 
@@ -329,6 +374,35 @@ public class AdditionalTestCase {
                     System.out.println("Additional test6 is OK!!");
                 }
             }
+
+            {
+                InformationEstimatorInterface additionalObject;
+                double newValue;
+                additionalObject = new InformationEstimator();
+                additionalObject.setTarget("".getBytes());
+                value = additionalObject.estimation();
+                if (value != 0) {
+                    System.out.println("IQ for '' in   should be 0 But it returns " + value);
+                    c++;
+                }else{
+                    System.out.println("Additional test7 is OK!!");
+                }
+            }
+
+            {
+                InformationEstimatorInterface additionalObject;
+                double newValue;
+                additionalObject = new InformationEstimator();
+                value = additionalObject.estimation();
+                if (value != 0) {
+                    System.out.println("IQ for   in   should be 0 But it returns " + value);
+                    c++;
+                }else{
+                    System.out.println("Additional test8 is OK!!");
+                }
+            }
+
+
 
         } catch (Exception e) {
             System.out.println("Exception occurred: STOP");

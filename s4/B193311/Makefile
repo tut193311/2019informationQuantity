@@ -10,3 +10,9 @@ run:
 # 	java -classpath "../.." s4.B193311/InformationEstimator
 	java -classpath "../.." s4.B193311/TestCase
 	java -classpath "../.." s4.B193311/AdditionalTestCase
+
+# ABCDE
+# BCDE
+# CDE
+# DE
+# E
