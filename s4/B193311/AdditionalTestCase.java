@@ -293,6 +293,20 @@ public class AdditionalTestCase {
                 c++;
             }
 
+            myObject = new Frequencer();
+            myObject.setSpace("abcdefghijklmnopqrstuvwxyz".getBytes());
+            for(byte i = 0; i < 26; i++){
+                myObject.setTarget("abcdefghijklmnopqrstuvwxyz".getBytes());
+                freq = myObject.subByteFrequency(i, i+1);
+                if (1 == freq) {
+                    System.out.println("SubBytefrequency() for abcdefghijklmnopqrstuvwxyz, should return 1, when taget is abcdefghijklmnopqrstuvwxyz[" + i + ":" + (i+1) + "]. It returns " + freq);
+                    c++;
+                }else{
+                    System.out.println("！！SubBytefrequency() for abcdefghijklmnopqrstuvwxyz, should return 1, when taget is abcdefghijklmnopqrstuvwxyz[" + i + ":" + (i+1) + "]. But it returns " + freq);
+                }
+            }
+
+
         } catch (Exception e) {
             System.out.println("Exception occurred in Frequencer Object: STOP");
             System.out.println(e);
